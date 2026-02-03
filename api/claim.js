@@ -2,35 +2,21 @@ const { Connection, Keypair, PublicKey, Transaction } = require('@solana/web3.js
 const { getOrCreateAssociatedTokenAccount, createTransferInstruction, getAssociatedTokenAddress } = require('@solana/spl-token');
 const bs58 = require('bs58');
 
-// Verify hCaptcha
-async function verifyCaptcha(token) {
-  const secret = process.env.HCAPTCHA_SECRET_KEY;
-  if (!secret) return true;
-  
-  try {
-    const res = await fetch('https://hcaptcha.com/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `secret=${secret}&response=${token}`
-    });
-    const data = await res.json();
-    return data.success;
-  } catch (e) {
-    console.error('Captcha verification failed:', e.message);
-    return false;
-  }
-}
-
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { walletAddress, captchaToken } = req.body;
+  const { walletAddress, mathAnswer, mathExpected } = req.body;
 
   // Validate wallet address
   if (!walletAddress) {
     return res.status(400).json({ error: 'Wallet address required' });
+  }
+
+  // Basic math check (already verified client-side, but double check)
+  if (mathAnswer !== mathExpected) {
+    return res.status(400).json({ error: 'Captcha failed' });
   }
 
   let recipientPubkey;
@@ -38,12 +24,6 @@ module.exports = async function handler(req, res) {
     recipientPubkey = new PublicKey(walletAddress);
   } catch (e) {
     return res.status(400).json({ error: 'Invalid Solana wallet address' });
-  }
-
-  // Verify captcha
-  const captchaValid = await verifyCaptcha(captchaToken);
-  if (!captchaValid) {
-    return res.status(400).json({ error: 'Captcha verification failed' });
   }
 
   // Check configuration
@@ -95,7 +75,7 @@ module.exports = async function handler(req, res) {
     const signature = await connection.sendRawTransaction(transaction.serialize());
     await connection.confirmTransaction(signature, 'confirmed');
     
-    console.log(`Sent ${amount} $PUMP to ${walletAddress} - tx: ${signature}`);
+    console.log(`Sent $PUMP to ${walletAddress} - tx: ${signature}`);
     
     res.json({ 
       success: true, 

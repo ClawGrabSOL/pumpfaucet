@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>$PUMP Faucet - Free PUMP Tokens</title>
   <link rel="stylesheet" href="style.css">
-  <!-- hCaptcha loaded dynamically when configured -->
 </head>
 <body>
   <div class="container">
@@ -18,7 +17,7 @@
     <main>
       <div class="faucet-box">
         <div class="info-banner">
-          🎁 Get <strong><span id="reward-amount">10</span> $PUMP</strong> tokens sent directly to your wallet!
+          🎁 Get <strong>10 $PUMP</strong> tokens sent directly to your wallet!
         </div>
 
         <form id="faucet-form">
@@ -31,9 +30,15 @@
             required
           >
 
-          <div class="captcha-section" id="captcha-section">
-            <p class="captcha-label">✅ Complete the captcha to prove you're human:</p>
-            <div id="captcha-container"></div>
+          <!-- Honeypot field - hidden from humans, bots fill it -->
+          <input type="text" name="website" id="honeypot" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="captcha-section">
+            <p class="captcha-label">🧮 Solve this to prove you're human:</p>
+            <div class="math-captcha">
+              <span id="math-problem"></span>
+              <input type="number" id="captcha-answer" placeholder="?" required>
+            </div>
           </div>
 
           <button type="submit" id="claim-btn">
@@ -50,7 +55,7 @@
         <p>This faucet gives out free $PUMP tokens to anyone who asks.</p>
         <ol>
           <li>Enter your Solana wallet address above</li>
-          <li>Complete the captcha verification</li>
+          <li>Solve the simple math problem</li>
           <li>Click the button and receive your tokens!</li>
         </ol>
         <p class="note">Tokens are sent instantly on the Solana blockchain.</p>

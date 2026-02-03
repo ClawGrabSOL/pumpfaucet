@@ -88,7 +88,8 @@ form input[type="text"] {
   background: #fffef0;
 }
 
-form input[type="text"]:focus {
+form input[type="text"]:focus,
+form input[type="number"]:focus {
   outline: none;
   border-color: #228b22;
   background: #fff;
@@ -110,13 +111,23 @@ form input[type="text"]:focus {
   color: #8b4513;
 }
 
-.h-captcha {
-  display: inline-block;
+.math-captcha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.captcha-placeholder {
-  padding: 20px;
-  color: #8b4513;
+.math-captcha input {
+  width: 80px;
+  padding: 10px;
+  font-size: 24px;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
 }
 
 /* Button */
@@ -255,5 +266,14 @@ footer {
   
   .info-banner {
     font-size: 16px;
+  }
+  
+  .math-captcha {
+    font-size: 20px;
+  }
+  
+  .math-captcha input {
+    width: 60px;
+    font-size: 20px;
   }
 }
