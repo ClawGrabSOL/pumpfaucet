@@ -1,8 +1,14 @@
 {
-  "buildCommand": "",
-  "outputDirectory": ".",
-  "rewrites": [
-    { "source": "/api/config", "destination": "/api/config.js" },
-    { "source": "/api/claim", "destination": "/api/claim.js" }
+  "version": 2,
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.css", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static", "config": { "zeroConfig": true } },
+    { "src": "api/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/config", "dest": "/api/config.js" },
+    { "src": "/api/claim", "dest": "/api/claim.js" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
