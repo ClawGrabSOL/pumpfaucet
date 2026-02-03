@@ -110,8 +110,8 @@ app.post('/api/claim', async (req, res) => {
       explorer: `https://solscan.io/tx/${signature}`
     });
   } catch (e) {
-    console.error('Transfer failed:', e.message);
-    res.status(500).json({ error: e.message });
+    console.error('Transfer failed:', e);
+    res.status(500).json({ error: e.message || e.toString() || 'Unknown error' });
   }
 });
 
