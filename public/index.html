@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$PUMP Faucet - Free PUMP Tokens</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- hCaptcha loaded dynamically when configured -->
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://pbs.twimg.com/profile_images/2018677555667095552/vNyT_tla_400x400.jpg" alt="$PUMP" class="logo">
+      <h1>$PUMP Faucet</h1>
+      <p class="subtitle">Free $PUMP tokens for everyone!</p>
+    </header>
+
+    <main>
+      <div class="faucet-box">
+        <div class="info-banner">
+          🎁 Get <strong><span id="reward-amount">10</span> $PUMP</strong> tokens sent directly to your wallet!
+        </div>
+
+        <form id="faucet-form">
+          <label for="wallet">Enter your Solana wallet address:</label>
+          <input 
+            type="text" 
+            id="wallet" 
+            placeholder="Your Solana address..."
+            autocomplete="off"
+            required
+          >
+
+          <div class="captcha-section" id="captcha-section">
+            <p class="captcha-label">✅ Complete the captcha to prove you're human:</p>
+            <div id="captcha-container"></div>
+          </div>
+
+          <button type="submit" id="claim-btn">
+            <span class="btn-text">💧 Get Free $PUMP</span>
+            <span class="btn-loading">⏳ Sending tokens...</span>
+          </button>
+        </form>
+
+        <div id="message" class="message"></div>
+      </div>
+
+      <div class="how-it-works">
+        <h2>How does this work?</h2>
+        <p>This faucet gives out free $PUMP tokens to anyone who asks.</p>
+        <ol>
+          <li>Enter your Solana wallet address above</li>
+          <li>Complete the captcha verification</li>
+          <li>Click the button and receive your tokens!</li>
+        </ol>
+        <p class="note">Tokens are sent instantly on the Solana blockchain.</p>
+      </div>
+
+      <div class="about">
+        <h2>What is $PUMP?</h2>
+        <p>$PUMP is a community token on Solana. This faucet exists to help distribute tokens and grow the community. Enjoy your free $PUMP!</p>
+      </div>
+    </main>
+
+    <footer>
+      <p>$PUMP Faucet &bull; Powered by Solana ⚡</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
