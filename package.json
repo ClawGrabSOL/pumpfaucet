@@ -2,7 +2,7 @@
   "name": "pump-faucet",
   "version": "1.0.0",
   "description": "$PUMP Token Faucet - Get free PUMP tokens",
-  "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js"
