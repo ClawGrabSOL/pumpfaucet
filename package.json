@@ -2,10 +2,9 @@
   "name": "pump-faucet",
   "version": "1.0.0",
   "description": "$PUMP Token Faucet - Get free PUMP tokens",
-  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "start": "node server.local.js",
+    "dev": "node --watch server.local.js"
   },
   "dependencies": {
     "@solana/web3.js": "^1.87.6",

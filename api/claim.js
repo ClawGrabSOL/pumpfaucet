@@ -1,6 +1,6 @@
-import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
-import { getOrCreateAssociatedTokenAccount, createTransferInstruction, getAssociatedTokenAddress } from '@solana/spl-token';
-import bs58 from 'bs58';
+const { Connection, Keypair, PublicKey, Transaction } = require('@solana/web3.js');
+const { getOrCreateAssociatedTokenAccount, createTransferInstruction, getAssociatedTokenAddress } = require('@solana/spl-token');
+const bs58 = require('bs58');
 
 // Verify hCaptcha
 async function verifyCaptcha(token) {
@@ -21,7 +21,7 @@ async function verifyCaptcha(token) {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
     const signature = await connection.sendRawTransaction(transaction.serialize());
     await connection.confirmTransaction(signature, 'confirmed');
     
-    console.log(`✅ Sent ${amount} $PUMP to ${walletAddress} - tx: ${signature}`);
+    console.log(`Sent ${amount} $PUMP to ${walletAddress} - tx: ${signature}`);
     
     res.json({ 
       success: true, 
@@ -107,4 +107,4 @@ export default async function handler(req, res) {
     console.error('Transfer failed:', e.message);
     res.status(500).json({ error: e.message });
   }
-}
+};
